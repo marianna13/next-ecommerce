@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "next build && next export"
+    "export": "next build && next export",
+    "test": "jest"
+  },
+  "transform": {
+    "^.+\\.[t|j]sx?$": "babel-jest"
   },
   "keywords": [
     "react",
@@ -16,15 +20,34 @@
     "next"
   ],
   "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@influxdata/influxdb-client": "^1.25.0",
+    "@mui/icons-material": "^5.6.2",
+    "@mui/material": "^5.7.0",
+    "chart.js": "^3.7.1",
+    "date-fns": "^2.28.0",
+    "google-map-react": "^2.1.10",
+    "influx": "^5.9.3",
+    "ioredis": "^5.0.4",
     "lodash": "^4.17.21",
-    "next": "^11.1.0",
+    "mongodb": "^4.5.0",
+    "next": "^11.1.4",
+    "next-auth": "^4.3.4",
     "next-redux-wrapper": "^6.0.2",
+    "plotly.js": "^2.11.1",
+    "prop-types": "^15.8.1",
     "rc-slider": "^9.3.1",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
+    "react": "^17.0.2",
+    "react-chartjs-2": "^4.1.0",
+    "react-dom": "^17.0.2",
     "react-hook-form": "^6.8.2",
+    "react-icons": "^4.3.1",
+    "react-perfect-scrollbar": "^1.5.8",
+    "react-plotly.js": "^2.5.1",
     "react-rater": "^5.1.1",
     "react-redux": "^7.2.1",
+    "react-router-dom": "^6.3.0",
     "react-select": "^3.1.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
@@ -34,10 +57,31 @@
     "sass": "^1.26.10",
     "swiper": "^6.5.1",
     "swr": "^0.3.2",
-    "use-onclickoutside": "^0.3.1"
+    "use-onclickoutside": "^0.3.1",
+    "validator": "^13.7.0",
+    "victory": "^36.3.2"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "babel-jest": "^29.1.0",
     "fslightbox-react": "^1.5.0",
+    "jest": "^29.1.1",
     "node-fetch": "^2.6.1"
-  }
+  },
+  "description": "This repo contains a work in progress Ecommerce responsive made with Next.js, Redux, Redux-persist, Hooks, SCSS and BEM. If you like it please give it a star :)\r ## Design",
+  "main": "next.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marianna13/next-ecommerce.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marianna13/next-ecommerce/issues"
+  },
+  "homepage": "https://github.com/marianna13/next-ecommerce#readme"
 }

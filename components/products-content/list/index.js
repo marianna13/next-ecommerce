@@ -1,12 +1,24 @@
-import useSwr from 'swr';
+import { useState, useEffect } from 'react';
+// import fetch from 'isomorphic-unfetch'
 import ProductItem from './../../product-item';
 import ProductsLoading from './loading';
 
 const ProductsContent = () => {
-  const fetcher = (url) => fetch(url).then((res) => res.json());
-  const { data, error } = useSwr('/api/products', fetcher);
+  const [data, setData] = useState(null)
+  const [isLoading, setLoading] = useState(false)
 
-  if (error) return <div>Failed to load users</div>;
+  useEffect(() => {
+    setLoading(true)
+    fetch('http://localhost:3000/api/products')
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data)
+        setLoading(false)
+      })
+  }, [])
+
+  if (isLoading) return <p>Loading...</p>
+  
   return (
     <>
       {!data && 
@@ -15,13 +27,13 @@ const ProductsContent = () => {
 
       {data &&
         <section className="products-list">
-          {data.map(item => (
+          {data['message'].map(item => (
             <ProductItem 
               discount={item.discount} 
               key={item.id}
               id={item.id} 
               price={item.price}
-              currentPrice={item.currentPrice}
+              currentPrice={item.discount ? (item.price*item.discount/100).toFixed(2) : item.price}
               productImage={item.images[0]} 
               name={item.name}
             />
@@ -31,5 +43,16 @@ const ProductsContent = () => {
     </>
   );
 };
-  
+
+// export async function getServerSideProps() {
+//   const res = await fetch("http://localhost:3000/api/products");
+//   const json = await res.json();
+
+//   return {
+//     props: {
+//       data: json,
+//     },
+//   };
+// }
+
 export default ProductsContent

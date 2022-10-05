@@ -4,9 +4,11 @@ import useOnClickOutside from 'use-onclickoutside';
 import Logo from '../../assets/icons/logo';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useSession, getSession } from "next-auth/react";
 
-const Header = ({ isErrorPage }) => {
+const Header = ({ isErrorPage, logged, setLogged }) => {
   const router = useRouter();
+  const { data: session, status } = useSession();
   const { cartItems } = useSelector(state => state.cart);
   const arrayPaths = ['/'];  
 
@@ -15,6 +17,8 @@ const Header = ({ isErrorPage }) => {
   const [searchOpen, setSearchOpen] = useState(false);
   const navRef = useRef(null);
   const searchRef = useRef(null);
+
+  const object = {setLogged:setLogged, logged:logged}
 
   const headerClass = () => {
     if(window.pageYOffset === 0) {
@@ -51,15 +55,21 @@ const Header = ({ isErrorPage }) => {
     <header className={`site-header ${!onTop ? 'site-header--fixed' : ''}`}>
       <div className="container">
         <Link href="/">
-          <a><h1 className="site-logo"><Logo />E-Shop</h1></a>
+          <a><h1 className="site-logo"><Logo />freshi.</h1></a>
         </Link>
         <nav ref={navRef} className={`site-nav ${menuOpen ? 'site-nav--open' : ''}`}>
-          <Link href="/products">
-            <a>Products</a>
+          <Link href="/products" >
+            <a>Продукты</a>
           </Link>
-          <a href="#">Inspiration</a>
-          <a href="#">Rooms</a>
-          <button className="site-nav__btn"><p>Account</p></button>
+          <Link href="/stores" >
+            <a>Магазины</a>
+          </Link>
+          {status==='authenticated' && 
+          <Link href="/dashboard" >
+            <a>Панель администратора</a>
+          </Link>
+          }
+          <button className="site-nav__btn"><p>Аккаунт</p></button>
         </nav>
 
         <div className="site-header__actions">
@@ -70,15 +80,16 @@ const Header = ({ isErrorPage }) => {
             </form>  
             <i onClick={() => setSearchOpen(!searchOpen)}  className="icon-search"></i>
           </button>
-          <Link href="/cart">
+          {status!='authenticated' && 
+            <Link href="/cart">
             <button className="btn-cart">
               <i className="icon-cart"></i>
               {cartItems.length > 0 && 
                 <span className="btn-cart__count">{cartItems.length}</span>
               }
             </button>
-          </Link>
-          <Link href="/login">
+          </Link>}
+          <Link href={{pathname:"/login", query:{object: JSON.stringify(object)}}}>
             <button className="site-header__btn-avatar"><i className="icon-avatar"></i></button>
           </Link>
           <button 

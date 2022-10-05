@@ -3,15 +3,22 @@ import Link from 'next/link';
 import { useForm } from "react-hook-form";
 import { server } from '../utils/server'; 
 import { postData } from '../utils/services'; 
+import { useSession, signIn, signOut } from "next-auth/react";
+import { GoMarkGithub } from "react-icons/go";
 
 const LoginPage = () => {
   const { register, handleSubmit, errors } = useForm();
+
+  const { data: session, status } = useSession();
+
 
   const onSubmit = async data => {
     const res = await postData(`${server}/api/login`, {
       email: data.email,
       password: data.password
     });
+    if (res.status) {
+    }
   };
 
   return (
@@ -20,14 +27,12 @@ const LoginPage = () => {
         <div className="container">
           <div className="back-button-section">
             <Link href="/products">
-              <a><i className="icon-left"></i> Back to store</a>
+              <a><i className="icon-left"></i> Вернуться к магазину</a>
             </Link>
           </div>
 
-          <div className="form-block">
-            <h2 className="form-block__title">Log in</h2>
-            <p className="form-block__description">Lorem Ipsum is simply dummy text of the printing and typesetting 
-            industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+          {!session ? <div className="form-block">
+           <h1>Войти</h1>
             
             <form className="form" onSubmit={handleSubmit(onSubmit)}>
               <div className="form__input-row">
@@ -43,11 +48,11 @@ const LoginPage = () => {
                 />
 
                 {errors.email && errors.email.type === 'required' && 
-                  <p className="message message--error">This field is required</p>
+                  <p className="message message--error">Обязательное поле</p>
                 }
 
                 {errors.email && errors.email.type === 'pattern' && 
-                  <p className="message message--error">Please write a valid email</p>
+                  <p className="message message--error">Введите действительный email</p>
                 }
               </div>
               
@@ -55,12 +60,12 @@ const LoginPage = () => {
                 <input 
                   className="form__input" 
                   type="password" 
-                  placeholder="Password" 
+                  placeholder="пароль" 
                   name="password"
                   ref={register({ required: true })}
                 />
                 {errors.password && errors.password.type === 'required' && 
-                  <p className="message message--error">This field is required</p>
+                  <p className="message message--error">Обязательное поле</p>
                 }
               </div>
 
@@ -74,28 +79,33 @@ const LoginPage = () => {
                       ref={register({ required: false })}
                     />
                     <span className="checkbox__check"></span>
-                    <p>Keep me signed in</p>
+                    <p>Запомните меня</p>
                   </label>
                 </div>
-                <a href="/forgot-password" className="form__info__forgot-password">Forgot password?</a>
+                <a href="/forgot-password" className="form__info__forgot-password">Забыли пароль?</a>
               </div>
 
               <div className="form__btns">
-                <button type="button" className="btn-social fb-btn"><i className="icon-facebook"></i>Facebook</button>
+                <button type="button" className="btn-social fb-btn" onClick={() => signIn("github")}><GoMarkGithub style={{margin:10}}/>Github</button>
                 <button type="button" className="btn-social google-btn"><img src="/images/icons/gmail.svg" alt="gmail" /> Gmail</button>
               </div>
 
-              <button type="submit" className="btn btn--rounded btn--yellow btn-submit">Sign in</button>
+              <button type="submit" className="btn btn--rounded btn--yellow btn-submit">Войти</button>
 
-              <p className="form__signup-link">Not a member yet? <a href="/register">Sign up</a></p>
+              <p className="form__signup-link">Нет аккаунта? <a href="/register">Зарегестрироваться</a></p>
             </form>
           </div>
+          :
+          <div>
+            <button onClick={signOut}>Выйти</button> <br />
+            </div>}
 
         </div>
       </section>
     </Layout>
   )
 }
+
   
 export default LoginPage
   

@@ -20,7 +20,9 @@ if (process.browser) {
 }
 
 const ProductsCarousel = ({ products }) => {
+  console.log(products)
   if (!products) return 'Loading';
+  
 
   return (
     <div className="products-carousel">
@@ -31,12 +33,12 @@ const ProductsCarousel = ({ products }) => {
       watchOverflow={true} 
       slidesPerView={slidesPerView} 
       className="swiper-wrapper">
-        {products.map(item => (
+        {products['message'].map(item => (
           <SwiperSlide key={item.id}>
             <ProductItem 
-              discount={item.discount}
+              discount={item.discount ? item.discount : 0}
               price={item.price}
-              currentPrice={item.currentPrice}
+              currentPrice={item.discount ? (item.price*item.discount/100).toFixed(2) : item.price}
               key={item.id}
               id={item.id} 
               productImage={item.images[0]} 

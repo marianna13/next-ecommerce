@@ -2,15 +2,14 @@ import { useDispatch } from 'react-redux';
 import { removeProduct } from './../../../store/actions/cartActions';
 import { setCount } from './../../../store/actions/cartActions';
 
-const ShoppingCart = ({ thumb, name, id, color, size, count, price }) => {
+const ShoppingCart = ({ thumb, name, id, count, price }) => {
   const dispatch = useDispatch();
+  console.log(price)
 
   const removeFromCart = () => {
     dispatch(removeProduct(
       { 
         id: id,
-        color: color,
-        size: size
       }
     ))
   }
@@ -23,8 +22,6 @@ const ShoppingCart = ({ thumb, name, id, color, size, count, price }) => {
     dispatch(setCount(
       { 
         id: id,
-        color: color,
-        size: size,
         count: count,
       }
     ))
@@ -44,8 +41,6 @@ const ShoppingCart = ({ thumb, name, id, color, size, count, price }) => {
           </div>
         </div>
       </td>
-      <td className="cart-item-before" data-label="Color">{color}</td>
-      <td className="cart-item-before" data-label="Size">{size}</td>
       <td>
         <div className="quantity-button">
           <button type="button" onClick={() => setProductCount(count - 1)} className="quantity-button__btn">

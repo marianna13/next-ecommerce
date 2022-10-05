@@ -3,7 +3,6 @@ import PageIntro from '../components/page-intro';
 import ProductsFeatured from '../components/products-featured';
 import Footer from '../components/footer';
 import Subscribe from '../components/subscribe';
-
 const IndexPage = () => {
   return (
     <Layout>
@@ -11,76 +10,37 @@ const IndexPage = () => {
 
       <section className="featured">
         <div className="container">
-          <article style={{backgroundImage: 'url(/images/featured-1.jpg)'}} className="featured-item featured-item-large">
+          <article style={{backgroundImage: 'url(https://images.unsplash.com/photo-1425934398893-310a009a77f9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80)'}} className="featured-item featured-item-large">
             <div className="featured-item__content">
-              <h3>New arrivals are now in!</h3>
-              <a href="#" className="btn btn--rounded">Show Collection</a>
+              <h3>Сезон голубики</h3>
+              <a href="#" className="btn btn--rounded">Посмотреть</a>
             </div>
           </article>
           
-          <article style={{backgroundImage: 'url(/images/featured-2.jpg)'}} className="featured-item featured-item-small-first">
+          <article style={{backgroundImage: 'url(https://images.unsplash.com/photo-1505252585461-04db1eb84625?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=408&q=80)'}} className="featured-item featured-item-small-first">
             <div className="featured-item__content">
-              <h3>Basic t-shirts $29,99</h3>
-              <a href="#" className="btn btn--rounded">More details</a>
+              <h3>Фруктовые коктейли</h3>
+              <a href="#" className="btn btn--rounded">Посмотреть</a>
             </div>
           </article>
           
-          <article style={{backgroundImage: 'url(/images/featured-3.jpg)'}} className="featured-item featured-item-small">
+          <article style={{backgroundImage: 'url(https://images.unsplash.com/photo-1590779033100-9f60a05a013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80)'}} className="featured-item featured-item-small">
             <div className="featured-item__content">
-              <h3>Sale this summer</h3>
-              <a href="#" className="btn btn--rounded">VIEW ALL</a>
+              <h3>Скидки для Вас</h3>
+              <a href="#" className="btn btn--rounded">Посмотреть</a>
             </div>
           </article>
         </div>
       </section>
-
-      <section className="section">
-        <div className="container">
-          <header className="section__intro">
-            <h4>Why should you choose us?</h4>
-          </header>
-
-          <ul className="shop-data-items">
-            <li>
-              <i className="icon-shipping"></i>
-              <div className="data-item__content">
-                <h4>Free Shipping</h4>
-                <p>All purchases over $199 are eligible for free shipping via USPS First Class Mail.</p>
-              </div>
-            </li>
-            
-            <li>
-              <i className="icon-payment"></i>
-              <div className="data-item__content">
-                <h4>Easy Payments</h4>
-                <p>All payments are processed instantly over a secure payment protocol.</p>
-              </div>
-            </li>
-            
-            <li>
-              <i className="icon-cash"></i>
-              <div className="data-item__content">
-                <h4>Money-Back Guarantee</h4>
-                <p>If an item arrived damaged or you've changed your mind, you can send it
-                back for a full refund.</p>
-              </div>
-            </li>
-            
-            <li>
-              <i className="icon-materials"></i>
-              <div className="data-item__content">
-                <h4>Finest Quality</h4>
-                <p>Designed to last, each of our products has been crafted with the finest materials.</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </section>
+       
 
       <ProductsFeatured />
       <Subscribe />
       <Footer />
     </Layout>
+
+    
+    
   )
 }
 

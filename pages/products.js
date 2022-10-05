@@ -10,7 +10,7 @@ const Products = () => (
     <section className="products-page">
       <div className="container">
         <ProductsFilter />
-        <ProductsContent />
+        <ProductsContent/>
       </div>
     </section>
     <Footer />

@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import Router from 'next/router';
 import {wrapper} from '../store';
+import { SessionProvider } from "next-auth/react"
 
 // global styles
 import 'swiper/swiper.scss';
@@ -19,10 +20,13 @@ if(isProduction) {
   Router.events.on('routeChangeComplete', (url) => gtag.pageview(url));
 }
 
-const MyApp = ({Component, pageProps}) => (
-  <Fragment>
+const MyApp = ({Component, pageProps: { session, ...pageProps }}) => (
+  <SessionProvider session={session}>
+    <Fragment>
     <Component {...pageProps} />
   </Fragment>
+  </SessionProvider>
+  
 );
 
 export default wrapper.withRedux(MyApp);

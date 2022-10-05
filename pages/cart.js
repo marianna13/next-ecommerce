@@ -7,5 +7,4 @@ const Products = () => (
   </Layout>
 )
   
-export default Products
-  
+export default Products;
